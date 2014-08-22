@@ -34,7 +34,7 @@ public class SlideInOutTopItemAnimator extends BaseItemAnimator {
     }
 
     @Override
-    protected void doAnimateAdd(RecyclerView.ViewHolder holder) {
+    protected void prepareAnimateAdd(RecyclerView.ViewHolder holder) {
         retrieveItemHeight(holder);
         ViewCompat.setTranslationY(holder.itemView, -mOriginalY);
     }

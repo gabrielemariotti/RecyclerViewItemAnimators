@@ -109,12 +109,12 @@ public abstract class BaseItemAnimator extends RecyclerView.ItemAnimator {
 
     @Override
     public boolean animateAdd(final RecyclerView.ViewHolder holder) {
-        doAnimateAdd(holder);
+        prepareAnimateAdd(holder);
         mPendingAdditions.add(holder);
         return true;
     }
 
-    protected abstract void doAnimateAdd(final RecyclerView.ViewHolder holder);
+    protected abstract void prepareAnimateAdd(final RecyclerView.ViewHolder holder);
 
     protected abstract void animateAddImpl(final RecyclerView.ViewHolder holder);
 
