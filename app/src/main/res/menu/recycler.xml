@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="example.gmariotti.it.test21.TaylorActivity" >
+
+    <item android:id="@+id/action_add"
+          android:title="add"
+          android:orderInCategory="100"
+          android:showAsAction="always" />
+
+    <item android:id="@+id/action_remove"
+          android:title="remove"
+          android:orderInCategory="100"
+          android:showAsAction="always" />
+</menu>

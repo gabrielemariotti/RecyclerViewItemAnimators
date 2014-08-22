@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <color name="demo_theme_main_color">@color/md_blue_400</color>
+    <color name="demo_theme_status_bar_color">@color/md_blue_500</color>
+
+    <color name="md_blue_400">#738ffe</color>
+    <color name="md_blue_500">#5677fc</color>
+
+</resources>
