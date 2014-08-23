@@ -24,3 +24,6 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.0-rc1'
     compile 'com.android.support:recyclerview-v7:21.0.0-rc1'
 }
+
+// Used to update in Maven
+//apply from: '../maven_push.gradle'
