@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import it.gmariotti.recyclerview.itemanimator.SlideInOutBottomItemAnimator;
 import it.gmariotti.recyclerview.itemanimator.SlideInOutLeftItemAnimator;
 import it.gmariotti.recyclerview.itemanimator.SlideInOutRightItemAnimator;
 import it.gmariotti.recyclerview.itemanimator.SlideInOutTopItemAnimator;
@@ -62,6 +63,9 @@ public class MainActivity extends Activity {
                     case 2:
                         mRecyclerView.setItemAnimator(new SlideInOutTopItemAnimator(mRecyclerView));
                         break;
+                    case 3:
+                        mRecyclerView.setItemAnimator(new SlideInOutBottomItemAnimator(mRecyclerView));
+                        break;
                 }
             }
 
@@ -86,11 +90,11 @@ public class MainActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_add) {
-            mAdapter.add("New String",2);
+            mAdapter.add("New String",SimpleAdapter.LAST_POSITION);
             return true;
         }
         if (id == R.id.action_remove) {
-            mAdapter.remove(2);
+            mAdapter.remove(SimpleAdapter.LAST_POSITION);
             return true;
         }
         return super.onOptionsItemSelected(item);

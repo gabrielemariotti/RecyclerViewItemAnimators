@@ -17,17 +17,21 @@ import java.util.List;
  */
 public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.SimpleViewHolder> {
 
+    public static final int LAST_POSITION = -1 ;
     private final Context mContext;
     private List<String> mData;
 
     public void add(String s,int position) {
-        position = position == -1 ? getItemCount()  : position;
+        position = position == LAST_POSITION ? getItemCount()  : position;
         mData.add(position,s);
         notifyItemInserted(position);
     }
 
     public void remove(int position){
-        if (position < getItemCount()  ) {
+        if (position == LAST_POSITION && getItemCount()>0)
+            position = getItemCount() -1 ;
+
+        if (position > LAST_POSITION && position < getItemCount()) {
             mData.remove(position);
             notifyItemRemoved(position);
         }

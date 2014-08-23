@@ -9,7 +9,7 @@
         <item>Slide left</item>
         <item>Slide right</item>
         <item>Slide top</item>
-
+        <item>Slide bottom</item>
     </string-array>
 
 </resources>
