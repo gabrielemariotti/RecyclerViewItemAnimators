@@ -37,6 +37,9 @@ To use this code you have to:
 
 The sample app uses all features available in the widget.
 
+These item animators can work also with the **TwoWayView** [library](https://github.com/lucasr/twoway-view) in the same way.
+
+
 ## Download
 
 You can now download it from Sonatype's snapshots repo.
