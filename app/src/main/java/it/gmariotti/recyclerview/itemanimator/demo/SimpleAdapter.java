@@ -81,7 +81,7 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.SimpleView
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext,"Position ="+position,Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Position =" + position, Toast.LENGTH_SHORT).show();
             }
         });
     }

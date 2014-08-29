@@ -10,6 +10,8 @@
         <item>Slide right</item>
         <item>Slide top</item>
         <item>Slide bottom</item>
+        <item>Scale</item>
+        <item>Slide right and Scale</item>
     </string-array>
 
 </resources>
