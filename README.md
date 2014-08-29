@@ -7,6 +7,8 @@ This code is cloned from `DefaultItemAnimator` provided by Google customizing th
 **SlideInOutRightItemAnimator** : which applies a slide in/out from/to the right animation
 **SlideInOutTopItemAnimator** : which applies a slide in/out from/to the top animation
 **SlideInOutBottomItemAnimator** : which applies a slide in/out from/to the bottom animation
+**ScaleInOutItemAnimator** : which applies a scale animation
+**SlideScaleInOutRightItemAnimator** : which applies a scale animation with a slide in/out from/to the right animation
 
 ![Screen](/demo.gif)
 
@@ -15,7 +17,7 @@ Quick example:
    mRecyclerView.setItemAnimator(new SlideInOutLeftItemAnimator(mRecyclerView));
 ```
 
-**NOTE**: These code is under heavy development at the moment.Feedback and patches are very welcome!
+**NOTE**: These code is under heavy development at the moment.Feedbacks and patches are very welcome!
 
 ## How do I use it?
 
