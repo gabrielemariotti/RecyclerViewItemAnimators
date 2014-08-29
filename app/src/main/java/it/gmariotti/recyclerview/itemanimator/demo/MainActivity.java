@@ -34,7 +34,6 @@ import it.gmariotti.recyclerview.itemanimator.SlideInOutLeftItemAnimator;
 import it.gmariotti.recyclerview.itemanimator.SlideInOutRightItemAnimator;
 import it.gmariotti.recyclerview.itemanimator.SlideInOutTopItemAnimator;
 import it.gmariotti.recyclerview.itemanimator.SlideScaleInOutRightItemAnimator;
-import it.gmariotti.recyclerview.itemanimator.listeners.SwipeItemTouchListener;
 
 
 public class MainActivity extends Activity {
@@ -55,14 +54,6 @@ public class MainActivity extends Activity {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this,LinearLayoutManager.VERTICAL));
 
         mAdapter = new SimpleAdapter(this,sCheeseStrings);
-
-        SwipeItemTouchListener listener =SwipeItemTouchListener.addTo(mRecyclerView);
-        listener.setOnItemSwipeListener(new SwipeItemTouchListener.OnItemSwipeListener() {
-            @Override
-            public void onDismiss(RecyclerView parent, RecyclerView.ViewHolder holder, int position, long id) {
-                mAdapter.remove(position);
-            }
-        });
 
         mRecyclerView.setAdapter(mAdapter);
     }
