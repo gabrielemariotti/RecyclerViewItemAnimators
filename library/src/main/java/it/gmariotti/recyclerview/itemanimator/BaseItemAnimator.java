@@ -127,6 +127,11 @@ public abstract class BaseItemAnimator extends RecyclerView.ItemAnimator {
     }
 
     @Override
+    public boolean animateChange(RecyclerView.ViewHolder oldHolder, RecyclerView.ViewHolder newHolder, int fromLeft, int fromTop, int toLeft, int toTop){
+        return true;
+    }
+
+    @Override
     public boolean animateAdd(final RecyclerView.ViewHolder holder) {
         prepareAnimateAdd(holder);
         mPendingAdditions.add(holder);
@@ -144,6 +149,7 @@ public abstract class BaseItemAnimator extends RecyclerView.ItemAnimator {
     }
 
     protected abstract void animateRemoveImpl(final RecyclerView.ViewHolder holder);
+
 
     @Override
     public boolean animateMove(final RecyclerView.ViewHolder holder, int fromX, int fromY,
