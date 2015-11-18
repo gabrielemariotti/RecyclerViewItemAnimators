@@ -18,6 +18,7 @@
 package it.gmariotti.recyclerview.itemanimator;
 
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -47,12 +48,21 @@ public class SlideScaleInOutRightItemAnimator extends BaseItemAnimator {
     protected void animateRemoveImpl(final RecyclerView.ViewHolder holder) {
         final View view = holder.itemView;
 
-        ViewCompat.animate(view).cancel();
-        ViewCompat.animate(view).setDuration(getRemoveDuration()).
+        final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
+        animation.setDuration(getRemoveDuration()).
                 scaleX(mEndScaleX).scaleY(mEndScaleY).
+                alpha(0).
                 translationX(+mRecyclerView.getWidth()).setListener(new VpaListenerAdapter() {
+
+            @Override
+            public void onAnimationStart(View view) {
+                dispatchRemoveStarting(holder);
+            }
+
             @Override
             public void onAnimationEnd(View view) {
+                animation.setListener(null);
+                ViewCompat.setAlpha(view, 1);
                 ViewCompat.setScaleX(view, mEndScaleX);
                 ViewCompat.setScaleY(view, mEndScaleY);
                 ViewCompat.setTranslationX(view, +mRecyclerView.getWidth());
@@ -78,12 +88,18 @@ public class SlideScaleInOutRightItemAnimator extends BaseItemAnimator {
     protected void animateAddImpl(final RecyclerView.ViewHolder holder) {
         final View view = holder.itemView;
 
-        ViewCompat.animate(view).cancel();
-        ViewCompat.animate(view).scaleX(mOriginalScaleX).scaleY(mOriginalScaleY).translationX(0)
+        final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
+        animation.scaleX(mOriginalScaleX).scaleY(mOriginalScaleY).translationX(0).alpha(1)
                 .setDuration(getAddDuration()).
                 setListener(new VpaListenerAdapter() {
                     @Override
+                    public void onAnimationStart(View view) {
+                        dispatchAddStarting(holder);
+                    }
+
+                    @Override
                     public void onAnimationCancel(View view) {
+                        ViewCompat.setAlpha(view, 1);
                         ViewCompat.setTranslationX(view, 0);
                         ViewCompat.setScaleX(view, mOriginalScaleX);
                         ViewCompat.setScaleY(view, mOriginalScaleY);
@@ -91,6 +107,7 @@ public class SlideScaleInOutRightItemAnimator extends BaseItemAnimator {
 
                     @Override
                     public void onAnimationEnd(View view) {
+                        animation.setListener(null);
                         dispatchAddFinished(holder);
                         mAddAnimations.remove(holder);
                         dispatchFinishedWhenDone();

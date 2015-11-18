@@ -18,6 +18,7 @@
 package it.gmariotti.recyclerview.itemanimator;
 
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -36,11 +37,18 @@ public class SlideInOutBottomItemAnimator extends BaseItemAnimator {
     protected void animateRemoveImpl(final RecyclerView.ViewHolder holder) {
         final View view = holder.itemView;
 
-        ViewCompat.animate(view).cancel();
-        ViewCompat.animate(view).setDuration(getRemoveDuration()).
-                translationY(+mDeltaY).setListener(new VpaListenerAdapter() {
+        final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
+        animation.setDuration(getRemoveDuration()).alpha(0)
+                .translationY(+mDeltaY).setListener(new VpaListenerAdapter() {
+            @Override
+            public void onAnimationStart(View view) {
+                dispatchRemoveStarting(holder);
+            }
+
             @Override
             public void onAnimationEnd(View view) {
+                animation.setListener(null);
+                ViewCompat.setAlpha(view, 1);
                 ViewCompat.setTranslationY(view, +mDeltaY);
                 dispatchRemoveFinished(holder);
                 mRemoveAnimations.remove(holder);
@@ -59,17 +67,24 @@ public class SlideInOutBottomItemAnimator extends BaseItemAnimator {
     protected void animateAddImpl(final RecyclerView.ViewHolder holder) {
         final View view = holder.itemView;
 
-        ViewCompat.animate(view).cancel();
-        ViewCompat.animate(view).translationY(0)
+        final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
+        animation.translationY(0).alpha(1)
                 .setDuration(getAddDuration()).
                 setListener(new VpaListenerAdapter() {
                     @Override
+                    public void onAnimationStart(View view) {
+                        dispatchAddStarting(holder);
+                    }
+
+                    @Override
                     public void onAnimationCancel(View view) {
+                        ViewCompat.setAlpha(view, 1);
                         ViewCompat.setTranslationY(view, 0);
                     }
 
                     @Override
                     public void onAnimationEnd(View view) {
+                        animation.setListener(null);
                         dispatchAddFinished(holder);
                         mAddAnimations.remove(holder);
                         dispatchFinishedWhenDone();
