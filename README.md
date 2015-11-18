@@ -21,8 +21,7 @@ Quick example:
 
 ## How do I use it?
 
-These animators work with the `RecyclerView` provided by Google with the support library `com.android.support:recyclerview-v7:21.0.0-rc1`.
-Currently it requires an Android-L emulator or device.
+These animators work with the `RecyclerView` provided by Google with the support library `com.android.support:recyclerview-v7:23.1.1`.
 
 To use this code you have to:
 
