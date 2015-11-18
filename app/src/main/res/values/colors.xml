@@ -7,4 +7,8 @@
     <color name="md_blue_400">#738ffe</color>
     <color name="md_blue_500">#5677fc</color>
 
+    <color name="colorPrimary">@color/md_blue_500</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
 </resources>

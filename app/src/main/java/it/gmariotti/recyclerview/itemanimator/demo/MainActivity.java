@@ -17,8 +17,8 @@
  */
 package it.gmariotti.recyclerview.itemanimator.demo;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -36,7 +36,7 @@ import it.gmariotti.recyclerview.itemanimator.SlideInOutTopItemAnimator;
 import it.gmariotti.recyclerview.itemanimator.SlideScaleInOutRightItemAnimator;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
     SimpleAdapter mAdapter;
@@ -46,15 +46,15 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
 
+        //Setup Spinner
         setupSpinner();
 
+        //Setup RecyclerView
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         //mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this,LinearLayoutManager.VERTICAL));
-
         mAdapter = new SimpleAdapter(this,sCheeseStrings);
-
         mRecyclerView.setAdapter(mAdapter);
     }
 
