@@ -1,28 +1,24 @@
-
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 'android-L'
-    buildToolsVersion "20.0.0"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "it.gmariotti.recyclerview.itemanimator"
-        minSdkVersion 'L'
-        targetSdkVersion 'L'
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion 14
+        targetSdkVersion 22        
     }
     buildTypes {
         release {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:21.0.0-rc1'
-    compile 'com.android.support:recyclerview-v7:21.0.0-rc1'
+    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
 }
 
 // Used to update in Maven
