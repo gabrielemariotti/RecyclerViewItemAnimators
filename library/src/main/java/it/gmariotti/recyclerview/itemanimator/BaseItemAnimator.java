@@ -4,6 +4,7 @@ package it.gmariotti.recyclerview.itemanimator;
  * This code is cloned from DefaultItemAnimator provided by support library v7-recyclerView
  *
  * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (c) 2014-2015 Gabriele Mariotti.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -208,8 +209,8 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
     @Override
     public boolean animateAdd(final RecyclerView.ViewHolder holder) {
         resetAnimation(holder);
-        ViewCompat.setAlpha(holder.itemView, 0);
         prepareAnimateAdd(holder);
+        ViewCompat.setAlpha(holder.itemView, 0);
         mPendingAdditions.add(holder);
         return true;
     }

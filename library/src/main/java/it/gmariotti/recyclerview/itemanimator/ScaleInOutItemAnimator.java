@@ -1,6 +1,6 @@
 /*
  * ******************************************************************************
- *   Copyright (c) 2014 Gabriele Mariotti.
+ *   Copyright (c) 2014-2015 Gabriele Mariotti.
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -45,83 +45,70 @@ public class ScaleInOutItemAnimator extends BaseItemAnimator {
     protected void animateRemoveImpl(final RecyclerView.ViewHolder holder) {
         final View view = holder.itemView;
         final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
-        animation.setDuration(getRemoveDuration()).alpha(0)
-                .scaleX(mEndScaleX).scaleY(mEndScaleY).setListener(new VpaListenerAdapter() {
-            @Override
-            public void onAnimationStart(View view) {
-                dispatchRemoveStarting(holder);
-            }
-
-            @Override
-            public void onAnimationEnd(View view) {
-                animation.setListener(null);
-                ViewCompat.setAlpha(view, 1);
-                ViewCompat.setScaleX(view, mEndScaleX);
-                ViewCompat.setScaleY(view, mEndScaleY);
-                dispatchRemoveFinished(holder);
-                mRemoveAnimations.remove(holder);
-                dispatchFinishedWhenDone();
-            }
-        }).start();
         mRemoveAnimations.add(holder);
+        animation.setDuration(getRemoveDuration())
+                .alpha(0)
+                .scaleX(0)
+                .scaleY(0)
+                .setListener(new VpaListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(View view) {
+                        dispatchRemoveStarting(holder);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(View view) {
+                        animation.setListener(null);
+                        ViewCompat.setAlpha(view, 1);
+                        ViewCompat.setScaleX(view, 0);
+                        ViewCompat.setScaleY(view, 0);
+                        dispatchRemoveFinished(holder);
+                        mRemoveAnimations.remove(holder);
+                        dispatchFinishedWhenDone();
+                    }
+                }).start();
     }
 
     @Override
     protected void prepareAnimateAdd(RecyclerView.ViewHolder holder) {
         retrieveOriginalScale(holder);
-        ViewCompat.setScaleX(holder.itemView, mInitialScaleX);
-        ViewCompat.setScaleY(holder.itemView, mInitialScaleY);
+        ViewCompat.setScaleX(holder.itemView, 0);
+        ViewCompat.setScaleY(holder.itemView, 0);
     }
-
 
 
     protected void animateAddImpl(final RecyclerView.ViewHolder holder) {
         final View view = holder.itemView;
         final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
-        animation.scaleX(mOriginalScaleX).scaleY(mOriginalScaleY).alpha(1)
-                .setDuration(getAddDuration()).
-                setListener(new VpaListenerAdapter() {
+        mAddAnimations.add(holder);
+        animation.scaleX(1)
+                .scaleY(1)
+                .alpha(1)
+                .setDuration(getAddDuration())
+                .setListener(new VpaListenerAdapter() {
                     @Override
                     public void onAnimationStart(View view) {
                         dispatchAddStarting(holder);
                     }
+
                     @Override
                     public void onAnimationCancel(View view) {
-                        ViewCompat.setScaleX(view, mOriginalScaleX);
-                        ViewCompat.setScaleY(view, mOriginalScaleY);
+                        ViewCompat.setScaleX(view, 1);
+                        ViewCompat.setScaleY(view, 1);
                         ViewCompat.setAlpha(view, 1);
                     }
 
                     @Override
                     public void onAnimationEnd(View view) {
                         animation.setListener(null);
+                        ViewCompat.setAlpha(view, 1);
+                        ViewCompat.setScaleX(view, 1);
+                        ViewCompat.setScaleY(view, 1);
                         dispatchAddFinished(holder);
                         mAddAnimations.remove(holder);
                         dispatchFinishedWhenDone();
                     }
                 }).start();
-        mAddAnimations.add(holder);
-    }
-
-    public void setInitialScale(float scaleXY){
-       setInitialScale(scaleXY, scaleXY);
-    }
-
-    public void setInitialScale(float scaleX, float scaleY){
-        mInitialScaleX = scaleX;
-        mInitialScaleY = scaleY;
-
-        mEndScaleX = scaleX;
-        mEndScaleY = scaleY;
-    }
-
-    public void setEndScale(float scaleXY){
-        setEndScale(scaleXY, scaleXY);
-    }
-
-    public void setEndScale(float scaleX, float scaleY){
-        mEndScaleX = scaleX;
-        mEndScaleY = scaleY;
     }
 
     private void retrieveOriginalScale(RecyclerView.ViewHolder holder) {

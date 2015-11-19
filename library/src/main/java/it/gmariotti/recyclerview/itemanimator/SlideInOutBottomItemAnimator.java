@@ -1,6 +1,6 @@
 /*
  * ******************************************************************************
- *   Copyright (c) 2014 Gabriele Mariotti.
+ *   Copyright (c) 2014-2015 Gabriele Mariotti.
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -38,24 +38,26 @@ public class SlideInOutBottomItemAnimator extends BaseItemAnimator {
         final View view = holder.itemView;
 
         final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
-        animation.setDuration(getRemoveDuration()).alpha(0)
-                .translationY(+mDeltaY).setListener(new VpaListenerAdapter() {
-            @Override
-            public void onAnimationStart(View view) {
-                dispatchRemoveStarting(holder);
-            }
-
-            @Override
-            public void onAnimationEnd(View view) {
-                animation.setListener(null);
-                ViewCompat.setAlpha(view, 1);
-                ViewCompat.setTranslationY(view, +mDeltaY);
-                dispatchRemoveFinished(holder);
-                mRemoveAnimations.remove(holder);
-                dispatchFinishedWhenDone();
-            }
-        }).start();
         mRemoveAnimations.add(holder);
+        animation.setDuration(getRemoveDuration())
+                .alpha(0)
+                .translationY(+mDeltaY)
+                .setListener(new VpaListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(View view) {
+                        dispatchRemoveStarting(holder);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(View view) {
+                        animation.setListener(null);
+                        ViewCompat.setAlpha(view, 1);
+                        ViewCompat.setTranslationY(view, +mDeltaY);
+                        dispatchRemoveFinished(holder);
+                        mRemoveAnimations.remove(holder);
+                        dispatchFinishedWhenDone();
+                    }
+                }).start();
     }
 
     @Override
@@ -68,9 +70,11 @@ public class SlideInOutBottomItemAnimator extends BaseItemAnimator {
         final View view = holder.itemView;
 
         final ViewPropertyAnimatorCompat animation = ViewCompat.animate(view);
-        animation.translationY(0).alpha(1)
-                .setDuration(getAddDuration()).
-                setListener(new VpaListenerAdapter() {
+        mAddAnimations.add(holder);
+        animation.translationY(0)
+                .alpha(1)
+                .setDuration(getAddDuration())
+                .setListener(new VpaListenerAdapter() {
                     @Override
                     public void onAnimationStart(View view) {
                         dispatchAddStarting(holder);
@@ -85,18 +89,19 @@ public class SlideInOutBottomItemAnimator extends BaseItemAnimator {
                     @Override
                     public void onAnimationEnd(View view) {
                         animation.setListener(null);
+                        ViewCompat.setAlpha(view, 1);
+                        ViewCompat.setTranslationY(view, 0);
                         dispatchAddFinished(holder);
                         mAddAnimations.remove(holder);
                         dispatchFinishedWhenDone();
                     }
                 }).start();
-        mAddAnimations.add(holder);
     }
 
 
-    private void retrieveItemPosition(final RecyclerView.ViewHolder holder){
-       mOriginalY = mRecyclerView.getLayoutManager().getDecoratedTop(holder.itemView);
-       mDeltaY = mRecyclerView.getHeight() - mOriginalY;
+    private void retrieveItemPosition(final RecyclerView.ViewHolder holder) {
+        mOriginalY = mRecyclerView.getLayoutManager().getDecoratedTop(holder.itemView);
+        mDeltaY = mRecyclerView.getHeight() - mOriginalY;
     }
 
 
