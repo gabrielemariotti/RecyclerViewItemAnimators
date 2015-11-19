@@ -15,7 +15,7 @@
  *   limitations under the License.
  *  *****************************************************************************
  */
-package it.gmariotti.recyclerview.itemanimator.demo;
+package it.gmariotti.recyclerview.itemanimator.demo.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +28,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import it.gmariotti.recyclerview.itemanimator.demo.R;
 
 /**
  * @author Gabriele Mariotti (gabri.mariotti@gmail.com)

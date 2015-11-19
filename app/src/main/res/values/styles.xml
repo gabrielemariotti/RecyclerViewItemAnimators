@@ -18,6 +18,8 @@
     <style name="DemoTheme.NoActionBar.Main">
 
     </style>
+    <style name="DemoTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="DemoTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 
 </resources>

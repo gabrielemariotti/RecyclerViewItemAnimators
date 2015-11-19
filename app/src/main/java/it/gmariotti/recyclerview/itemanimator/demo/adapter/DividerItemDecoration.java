@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package it.gmariotti.recyclerview.itemanimator.demo;
+package it.gmariotti.recyclerview.itemanimator.demo.adapter;
 
 import android.content.Context;
 import android.content.res.TypedArray;

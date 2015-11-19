@@ -14,4 +14,15 @@
         <item>Slide right and Scale</item>
     </string-array>
 
+    <string-array name="adapters">
+        <item>Alpha</item>
+        <item>Slide bottom</item>
+    </string-array>
+
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_main">MainActivity</string>
+
 </resources>
