@@ -3,12 +3,12 @@ This code is cloned from `DefaultItemAnimator` provided by Google customizing th
 
 ## Feature
 
-**SlideInOutLeftItemAnimator** : which applies a slide in/out from/to the left animation
-**SlideInOutRightItemAnimator** : which applies a slide in/out from/to the right animation
-**SlideInOutTopItemAnimator** : which applies a slide in/out from/to the top animation
-**SlideInOutBottomItemAnimator** : which applies a slide in/out from/to the bottom animation
-**ScaleInOutItemAnimator** : which applies a scale animation
-**SlideScaleInOutRightItemAnimator** : which applies a scale animation with a slide in/out from/to the right animation
+* **SlideInOutLeftItemAnimator** : which applies a slide in/out from/to the left animation
+* **SlideInOutRightItemAnimator** : which applies a slide in/out from/to the right animation
+* **SlideInOutTopItemAnimator** : which applies a slide in/out from/to the top animation
+* **SlideInOutBottomItemAnimator** : which applies a slide in/out from/to the bottom animation
+* **ScaleInOutItemAnimator** : which applies a scale animation
+* **SlideScaleInOutRightItemAnimator** : which applies a scale animation with a slide in/out from/to the right animation
 
 ![Screen](/demo.gif)
 
@@ -61,8 +61,6 @@ You can now download it from Sonatype's snapshots repo.
     }
     ```
     
-I'll be updating the snapshots regularly.
-
 
 Credits
 -------
