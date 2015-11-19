@@ -33,6 +33,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 
@@ -266,8 +267,10 @@ public class ViewAnimator {
     private int calculateAnimationDelay(final int position) {
         int delay;
 
-        int lastVisiblePosition = ((LinearLayoutManager)mRecyclerView.getLayoutManager()).findLastVisibleItemPosition();
-        int firstVisiblePosition = ((LinearLayoutManager)mRecyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+        int lastVisiblePosition = ((LinearLayoutManager)mRecyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+        int firstVisiblePosition = ((LinearLayoutManager)mRecyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+
+        if (mLastAnimatedPosition > lastVisiblePosition) lastVisiblePosition = mLastAnimatedPosition;
 
         int numberOfItemsOnScreen = lastVisiblePosition - firstVisiblePosition;
         int numberOfAnimatedItems = position - 1 - mFirstAnimatedPosition;
@@ -278,11 +281,13 @@ public class ViewAnimator {
             if (mRecyclerView.getLayoutManager() instanceof GridLayoutManager) {
                 int numColumns = ( (GridLayoutManager)mRecyclerView.getLayoutManager()).getSpanCount();
                 delay += mAnimationDelayMillis * (position % numColumns);
+                Log.d("GAB", "Delay[" + position + "]=*"+lastVisiblePosition+"|"+firstVisiblePosition+"|");
             }
         } else {
             int delaySinceStart = (position - mFirstAnimatedPosition) * mAnimationDelayMillis;
             delay = Math.max(0, (int) (-SystemClock.uptimeMillis() + mAnimationStartMillis + mInitialDelayMillis + delaySinceStart));
         }
+        Log.d("GAB", "Delay[" + position + "]=" + delay+"|"+lastVisiblePosition+"|"+firstVisiblePosition+"|");
         return delay;
     }
 

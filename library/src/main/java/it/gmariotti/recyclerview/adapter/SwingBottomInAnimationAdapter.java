@@ -33,8 +33,8 @@ public class SwingBottomInAnimationAdapter extends AnimatorAdapter {
 
     private static final String TRANSLATION_Y = "translationY";
 
-    public SwingBottomInAnimationAdapter(RecyclerView.Adapter<RecyclerView.ViewHolder> adapter) {
-        super(adapter);
+    public SwingBottomInAnimationAdapter(RecyclerView.Adapter<RecyclerView.ViewHolder> adapter, RecyclerView recyclerView) {
+        super(adapter, recyclerView);
     }
 
     @NonNull
@@ -43,6 +43,6 @@ public class SwingBottomInAnimationAdapter extends AnimatorAdapter {
         float mOriginalY = mRecyclerView.getLayoutManager().getDecoratedTop(view);
         float mDeltaY = mRecyclerView.getHeight() - mOriginalY;
 
-        return new Animator[] { ObjectAnimator.ofFloat(view, TRANSLATION_Y, mDeltaY, 0) };
+        return new Animator[]{ObjectAnimator.ofFloat(view, TRANSLATION_Y, mDeltaY, 0)};
     }
 }

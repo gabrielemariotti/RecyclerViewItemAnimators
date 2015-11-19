@@ -24,11 +24,8 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.List;
 
 /**
  * The class applies multiple {@link Animator}s at once to views when they are first shown.
@@ -36,7 +33,7 @@ import java.util.List;
  *
  * @Author Gabriele Mariotti
  */
-public abstract class AnimatorAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class AnimatorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private RecyclerView.Adapter<RecyclerView.ViewHolder> mAdapter;
 
@@ -57,8 +54,10 @@ public abstract class AnimatorAdapter extends  RecyclerView.Adapter<RecyclerView
     // Constructors
     //-----------------------------------------------------------------------------
 
-    public AnimatorAdapter(RecyclerView.Adapter<RecyclerView.ViewHolder> adapter) {
+    public AnimatorAdapter(RecyclerView.Adapter<RecyclerView.ViewHolder> adapter, RecyclerView recyclerView) {
         mAdapter = adapter;
+        mViewAnimator = new ViewAnimator(recyclerView);
+        mRecyclerView = recyclerView;
     }
 
 
@@ -67,19 +66,9 @@ public abstract class AnimatorAdapter extends  RecyclerView.Adapter<RecyclerView
     //-----------------------------------------------------------------------------
 
     /**
-     * Call this method before setting this adapter to the RecyclerView
-     *
-     * @param recyclerView
-     */
-    public void setRecyclerView(@NonNull final RecyclerView recyclerView) {
-        mViewAnimator = new ViewAnimator(recyclerView);
-        mRecyclerView = recyclerView;
-    }
-
-    /**
      * Returns the Animators to apply to the views.
      *
-     * @param view   The view that will be animated, as retrieved by onBindViewHolder().
+     * @param view The view that will be animated, as retrieved by onBindViewHolder().
      */
     @NonNull
     public abstract Animator[] getAnimators(@NonNull View view);
@@ -90,27 +79,30 @@ public abstract class AnimatorAdapter extends  RecyclerView.Adapter<RecyclerView
     private static final String ALPHA = "alpha";
 
     /**
-     * Animates given View if necessary.
+     * Animates given View
      *
      * @param position the position of the item the View represents.
      * @param view     the View that should be animated.
      */
-    private void animateViewIfNecessary(final int position, @NonNull final View view) {
+    private void animateView(final View view, final int position) {
         assert mViewAnimator != null;
+        assert mRecyclerView != null;
 
         Animator[] animators = getAnimators(view);
         Animator alphaAnimator = ObjectAnimator.ofFloat(view, ALPHA, 0, 1);
         Animator[] concatAnimators = AnimatorUtil.concatAnimators(animators, alphaAnimator);
-        if (mViewAnimator != null) {
-            mViewAnimator.animateViewIfNecessary(position, view, concatAnimators);
-        } else {
-            Log.w("AnimatorAdapter", "Warning: call AnimatorAdapter.setRecyclerView(RecyclerView recyclerView) before calling the setAdapter() method");
-        }
+        mViewAnimator.animateViewIfNecessary(position, view, concatAnimators);
+    }
+
+    @Nullable
+    public ViewAnimator getViewAnimator() {
+        return mViewAnimator;
     }
 
     //-----------------------------------------------------------------------------
     // SaveInstanceState
     //-----------------------------------------------------------------------------
+
     /**
      * Returns a Parcelable object containing the AnimationAdapter's current dynamic state.
      */
@@ -151,10 +143,12 @@ public abstract class AnimatorAdapter extends  RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         mAdapter.onBindViewHolder(holder, position);
-        animateViewIfNecessary(position, holder.itemView);
+        mViewAnimator.cancelExistingAnimation(holder.itemView);
+        animateView(holder.itemView, position);
     }
 
-    @Override public int getItemCount() {
+    @Override
+    public int getItemCount() {
         return mAdapter.getItemCount();
     }
 
@@ -169,15 +163,10 @@ public abstract class AnimatorAdapter extends  RecyclerView.Adapter<RecyclerView
         mAdapter.registerAdapterDataObserver(observer);
     }
 
-    @Override public void unregisterAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+    @Override
+    public void unregisterAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
         super.unregisterAdapterDataObserver(observer);
         mAdapter.unregisterAdapterDataObserver(observer);
-    }
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
-        mAdapter.onBindViewHolder(holder, position, payloads);
-        animateViewIfNecessary(position, holder.itemView);
     }
 
     @Override

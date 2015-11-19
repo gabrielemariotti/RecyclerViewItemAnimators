@@ -27,8 +27,8 @@ import android.view.View;
  */
 public class AlphaAnimatorAdapter extends AnimatorAdapter {
 
-    public AlphaAnimatorAdapter(RecyclerView.Adapter<RecyclerView.ViewHolder> adapter) {
-        super(adapter);
+    public AlphaAnimatorAdapter(RecyclerView.Adapter<RecyclerView.ViewHolder> adapter, RecyclerView recyclerView) {
+        super(adapter, recyclerView);
     }
 
     @NonNull
