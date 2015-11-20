@@ -16,6 +16,10 @@
 
     <string-array name="adapters">
         <item>Alpha</item>
+        <item>Slide left</item>
+        <item>Slide right</item>
+        <item>Slide bottom</item>
+        <item>Scale</item>
         <item>Slide bottom</item>
     </string-array>
 
