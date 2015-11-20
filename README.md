@@ -57,7 +57,7 @@ You can now download it from Sonatype's snapshots repo.
 
     ```
     dependencies {
-        compile 'com.github.gabrielemariotti.recyclerview:recyclerview-animators:0.1.0-SNAPSHOT@aar'
+        compile 'com.github.gabrielemariotti.recyclerview:recyclerview-animators:0.2.0-SNAPSHOT@aar'
     }
     ```
     
