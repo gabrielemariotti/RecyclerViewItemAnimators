@@ -27,10 +27,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import it.gmariotti.recyclerview.adapter.AlphaAnimatorAdapter;
-import it.gmariotti.recyclerview.adapter.ScaleInRecyclerViewAnimationAdapter;
-import it.gmariotti.recyclerview.adapter.SlideInBottomAnimationRecyclerViewAdapter;
-import it.gmariotti.recyclerview.adapter.SlideInLeftAnimationRecyclerViewAdapter;
-import it.gmariotti.recyclerview.adapter.SlideInRightAnimationRecyclerViewAdapter;
+import it.gmariotti.recyclerview.adapter.ScaleInAnimatorAdapter;
+import it.gmariotti.recyclerview.adapter.SlideInBottomAnimatorAdapter;
+import it.gmariotti.recyclerview.adapter.SlideInLeftAnimatorAdapter;
+import it.gmariotti.recyclerview.adapter.SlideInRightAnimatorAdapter;
 import it.gmariotti.recyclerview.adapter.SwingBottomInAnimationAdapter;
 import it.gmariotti.recyclerview.itemanimator.demo.R;
 import it.gmariotti.recyclerview.itemanimator.demo.adapter.AnimationGridAdapter;
@@ -80,19 +80,19 @@ public class AnimationGridActivity extends AppCompatActivity {
                         mRecyclerView.setAdapter(animatorAdapter);
                         break;
                     case 1:
-                        SlideInLeftAnimationRecyclerViewAdapter slideInLeftAnimationRecyclerViewAdapter = new SlideInLeftAnimationRecyclerViewAdapter(mAdapter, mRecyclerView);
+                        SlideInLeftAnimatorAdapter slideInLeftAnimationRecyclerViewAdapter = new SlideInLeftAnimatorAdapter(mAdapter, mRecyclerView);
                         mRecyclerView.setAdapter(slideInLeftAnimationRecyclerViewAdapter);
                         break;
                     case 2:
-                        SlideInRightAnimationRecyclerViewAdapter slideInRightAnimationRecyclerViewAdapter = new SlideInRightAnimationRecyclerViewAdapter(mAdapter, mRecyclerView);
-                        mRecyclerView.setAdapter(slideInRightAnimationRecyclerViewAdapter);
+                        SlideInRightAnimatorAdapter slideInRightAnimatorAdapter = new SlideInRightAnimatorAdapter(mAdapter, mRecyclerView);
+                        mRecyclerView.setAdapter(slideInRightAnimatorAdapter);
                         break;
                     case 3:
-                        SlideInBottomAnimationRecyclerViewAdapter slideInBottomAnimationRecyclerViewAdapter= new SlideInBottomAnimationRecyclerViewAdapter(mAdapter, mRecyclerView);
-                        mRecyclerView.setAdapter(slideInBottomAnimationRecyclerViewAdapter);
+                        SlideInBottomAnimatorAdapter slideInBottomAnimatorAdapter= new SlideInBottomAnimatorAdapter(mAdapter, mRecyclerView);
+                        mRecyclerView.setAdapter(slideInBottomAnimatorAdapter);
                         break;
                     case 4:
-                        ScaleInRecyclerViewAnimationAdapter scaleInRecyclerViewAnimationAdapter = new ScaleInRecyclerViewAnimationAdapter(mAdapter, mRecyclerView);
+                        ScaleInAnimatorAdapter scaleInRecyclerViewAnimationAdapter = new ScaleInAnimatorAdapter(mAdapter, mRecyclerView);
                         mRecyclerView.setAdapter(scaleInRecyclerViewAnimationAdapter);
                         break;
                     case 5:
