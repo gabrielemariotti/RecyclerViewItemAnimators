@@ -25,22 +25,36 @@ import android.view.View;
 
 /**
  * An implementation of the AnimatorAdapter class which applies a
- * swing-in-from-bottom-animation to views.
+ * scale-animation to views.
  *
  * @Author Gabriele Mariotti
  */
-public class SlideInBottomAnimationRecyclerViewAdapter<T extends RecyclerView.ViewHolder> extends AnimatorAdapter<T> {
+public class ScaleInAnimatorAdapter<T extends RecyclerView.ViewHolder> extends AnimatorAdapter<T> {
 
-    private static final String TRANSLATION_Y = "translationY";
+    private static final float DEFAULT_SCALE_FROM = 0.6f;
 
-    public SlideInBottomAnimationRecyclerViewAdapter(RecyclerView.Adapter<T> adapter,
-                                                     RecyclerView recyclerView) {
+    private static final String SCALE_X = "scaleX";
+    private static final String SCALE_Y = "scaleY";
+
+    private final float mScaleFrom;
+
+    public ScaleInAnimatorAdapter(@NonNull final RecyclerView.Adapter<T> adapter,
+                                  RecyclerView recyclerView) {
+        this(adapter, recyclerView, DEFAULT_SCALE_FROM);
+    }
+
+    public ScaleInAnimatorAdapter(@NonNull final RecyclerView.Adapter<T> adapter,
+                                  RecyclerView recyclerView,
+                                  final float scaleFrom) {
         super(adapter, recyclerView);
+        mScaleFrom = scaleFrom;
     }
 
     @NonNull
     @Override
     public Animator[] getAnimators(@NonNull View view) {
-        return new Animator[]{ObjectAnimator.ofFloat(view, TRANSLATION_Y, mRecyclerView.getMeasuredHeight() >> 1, 0)};
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, SCALE_X, mScaleFrom, 1f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, SCALE_Y, mScaleFrom, 1f);
+        return new ObjectAnimator[]{scaleX, scaleY};
     }
 }

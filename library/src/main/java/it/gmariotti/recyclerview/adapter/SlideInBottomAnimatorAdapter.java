@@ -25,22 +25,22 @@ import android.view.View;
 
 /**
  * An implementation of the AnimatorAdapter class which applies a
- * swing-in-from-the-left-animation to views.
+ * swing-in-from-bottom-animation to views.
  *
  * @Author Gabriele Mariotti
  */
-public class SlideInLeftAnimationRecyclerViewAdapter<T extends RecyclerView.ViewHolder> extends AnimatorAdapter<T> {
+public class SlideInBottomAnimatorAdapter<T extends RecyclerView.ViewHolder> extends AnimatorAdapter<T> {
 
-    private static final String TRANSLATION_X = "translationX";
+    private static final String TRANSLATION_Y = "translationY";
 
-    public SlideInLeftAnimationRecyclerViewAdapter(RecyclerView.Adapter<T> adapter,
-                                                   RecyclerView recyclerView) {
+    public SlideInBottomAnimatorAdapter(RecyclerView.Adapter<T> adapter,
+                                        RecyclerView recyclerView) {
         super(adapter, recyclerView);
     }
 
     @NonNull
     @Override
     public Animator[] getAnimators(@NonNull View view) {
-        return new Animator[]{ObjectAnimator.ofFloat(view, TRANSLATION_X, 0 - mRecyclerView.getLayoutManager().getWidth(), 0)};
+        return new Animator[]{ObjectAnimator.ofFloat(view, TRANSLATION_Y, mRecyclerView.getMeasuredHeight() >> 1, 0)};
     }
 }
