@@ -1,7 +1,45 @@
-This repo provides simple animators for the item views in the `RecyclerView`
-This code is cloned from `DefaultItemAnimator` provided by Google customizing the animations.
+# RecyclerViewItemAnimators Library
+Travis master: [![Build Status](https://travis-ci.org/gabrielemariotti/RecyclerViewItemAnimators.svg?branch=master)](https://travis-ci.org/gabrielemariotti/RecyclerViewItemAnimators)
+
+This repo provides:
+* **Appearance animations**
+* **Simple animators** for the item views
+
+![Screen](/demo.gif)
+
+## Quick start
+
+You can now download it from Sonatype's snapshots repo.
+
+1. Add the snapshots repo to your `build.gradle`
+
+    ```groovy
+    repositories {
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+    ```
+
+2. Add build dependency
+
+    ```groovy
+    dependencies {
+        compile 'com.github.gabrielemariotti.recyclerview:recyclerview-animators:0.3.0-SNAPSHOT@aar'
+    }
+    ```
 
 ## Feature
+
+These animators work with the `RecyclerView` provided by Google with the support library `com.android.support:recyclerview-v7:23.1.1`.
+
+**Appearance animations:** which work when loading on the screen or when scrolling
+* Alpha
+* SlideInLeft
+* SlideInRight
+* SlideInBottom
+* ScaleIn
+
+**Simple Animators:** cloned from `DefaultItemAnimator` provided by Google customizing the animations.
+*This part is still in beta.*
 
 * **SlideInOutLeftItemAnimator** : which applies a slide in/out from/to the left animation
 * **SlideInOutRightItemAnimator** : which applies a slide in/out from/to the right animation
@@ -10,57 +48,31 @@ This code is cloned from `DefaultItemAnimator` provided by Google customizing th
 * **ScaleInOutItemAnimator** : which applies a scale animation
 * **SlideScaleInOutRightItemAnimator** : which applies a scale animation with a slide in/out from/to the right animation
 
-![Screen](/demo.gif)
 
-Quick example:
+## Quick example:
+
+**Appearance animations:**
+```java
+   mAdapter = new MyAdapter(this);
+
+   AlphaAnimatorAdapter animatorAdapter = new AlphaAnimatorAdapter(mAdapter, mRecyclerView);
+   mRecyclerView.setAdapter(animatorAdapter);
+```
+
+**Simple Animators:**
 ```java
    mRecyclerView.setItemAnimator(new SlideInOutLeftItemAnimator(mRecyclerView));
 ```
 
-**NOTE**: These code is under heavy development at the moment.Feedbacks and patches are very welcome!
-
-## How do I use it?
-
-These animators work with the `RecyclerView` provided by Google with the support library `com.android.support:recyclerview-v7:23.1.1`.
-
-To use this code you have to:
-
-1. Import `RecyclerViewItemAnimator` as a library to your project.
-
-2. Add a `RecyclerView` to your layout with your custom `Adapter` and `LayoutManager`.
-
-3. Set the `ItemAnimator` to the `RecyclerView`.
-
-```java
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.list);
-        mRecyclerView.setItemAnimator(new SlideInOutLeftItemAnimator(mRecyclerView));
-```
+**NOTE**: Feedbacks and patches are welcome!
 
 The sample app uses all features available in the widget.
 
-These item animators can work also with the **TwoWayView** [library](https://github.com/lucasr/twoway-view) in the same way.
 
+## ChangeLog
 
-## Download
+* [Changelog:](CHANGELOG.md) A complete changelog
 
-You can now download it from Sonatype's snapshots repo.
-
-1. Add the snapshots repo to your `build.gradle`
-
-    ```
-    repositories {
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-    }
-    ```
-
-2. Add build dependency
-
-    ```
-    dependencies {
-        compile 'com.github.gabrielemariotti.recyclerview:recyclerview-animators:0.2.0-SNAPSHOT@aar'
-    }
-    ```
-    
 
 Credits
 -------
