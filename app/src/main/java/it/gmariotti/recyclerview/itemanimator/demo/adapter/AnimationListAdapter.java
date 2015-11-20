@@ -53,12 +53,12 @@ public class AnimationListAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         public SimpleViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.title);
+            title = (TextView) view.findViewById(R.id.simple_text);
         }
     }
 
     public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(mContext).inflate(R.layout.grid_item, parent, false);
+        final View view = LayoutInflater.from(mContext).inflate(R.layout.simple_item, parent, false);
         return new SimpleViewHolder(view);
     }
 

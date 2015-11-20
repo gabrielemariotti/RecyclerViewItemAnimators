@@ -27,6 +27,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import it.gmariotti.recyclerview.adapter.AlphaAnimatorAdapter;
+import it.gmariotti.recyclerview.adapter.ScaleInAnimatorAdapter;
+import it.gmariotti.recyclerview.adapter.SlideInBottomAnimatorAdapter;
+import it.gmariotti.recyclerview.adapter.SlideInLeftAnimatorAdapter;
+import it.gmariotti.recyclerview.adapter.SlideInRightAnimatorAdapter;
 import it.gmariotti.recyclerview.adapter.SwingBottomInAnimationAdapter;
 import it.gmariotti.recyclerview.itemanimator.demo.R;
 import it.gmariotti.recyclerview.itemanimator.demo.adapter.AnimationListAdapter;
@@ -74,6 +78,22 @@ public class AnimationListActivity extends AppCompatActivity {
                         mRecyclerView.setAdapter(animatorAdapter);
                         break;
                     case 1:
+                        SlideInLeftAnimatorAdapter slideInLeftAnimationRecyclerViewAdapter = new SlideInLeftAnimatorAdapter(mAdapter, mRecyclerView);
+                        mRecyclerView.setAdapter(slideInLeftAnimationRecyclerViewAdapter);
+                        break;
+                    case 2:
+                        SlideInRightAnimatorAdapter slideInRightAnimatorAdapter = new SlideInRightAnimatorAdapter(mAdapter, mRecyclerView);
+                        mRecyclerView.setAdapter(slideInRightAnimatorAdapter);
+                        break;
+                    case 3:
+                        SlideInBottomAnimatorAdapter slideInBottomAnimatorAdapter= new SlideInBottomAnimatorAdapter(mAdapter, mRecyclerView);
+                        mRecyclerView.setAdapter(slideInBottomAnimatorAdapter);
+                        break;
+                    case 4:
+                        ScaleInAnimatorAdapter scaleInRecyclerViewAnimationAdapter = new ScaleInAnimatorAdapter(mAdapter, mRecyclerView);
+                        mRecyclerView.setAdapter(scaleInRecyclerViewAnimationAdapter);
+                        break;
+                    case 5:
                         SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(mAdapter, mRecyclerView);
                         mRecyclerView.setAdapter(swingBottomInAnimationAdapter);
                         break;
