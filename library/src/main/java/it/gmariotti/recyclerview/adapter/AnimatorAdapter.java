@@ -27,15 +27,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import it.gmariotti.recyclerview.adapter.helper.AnimatorUtil;
+import it.gmariotti.recyclerview.adapter.helper.ViewAnimator;
+
 /**
  * The class applies multiple {@link Animator}s at once to views when they are first shown.
  * The Animators applied include the animations specified in {@link #getAnimators(View)}, plus an alpha transition.
  *
  * @Author Gabriele Mariotti
  */
-public abstract class AnimatorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class AnimatorAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> {
 
-    private RecyclerView.Adapter<RecyclerView.ViewHolder> mAdapter;
+    private RecyclerView.Adapter<T> mAdapter;
 
     /**
      * Saved instance state key for the ViewAnimator
@@ -54,7 +57,7 @@ public abstract class AnimatorAdapter extends RecyclerView.Adapter<RecyclerView.
     // Constructors
     //-----------------------------------------------------------------------------
 
-    public AnimatorAdapter(RecyclerView.Adapter<RecyclerView.ViewHolder> adapter, RecyclerView recyclerView) {
+    public AnimatorAdapter(RecyclerView.Adapter<T> adapter, RecyclerView recyclerView) {
         mAdapter = adapter;
         mViewAnimator = new ViewAnimator(recyclerView);
         mRecyclerView = recyclerView;
@@ -136,12 +139,12 @@ public abstract class AnimatorAdapter extends RecyclerView.Adapter<RecyclerView.
     //-----------------------------------------------------------------------------
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public T onCreateViewHolder(ViewGroup parent, int viewType) {
         return mAdapter.onCreateViewHolder(parent, viewType);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(T holder, int position) {
         mAdapter.onBindViewHolder(holder, position);
         mViewAnimator.cancelExistingAnimation(holder.itemView);
         animateView(holder.itemView, position);
@@ -180,22 +183,22 @@ public abstract class AnimatorAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     @Override
-    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+    public void onViewRecycled(T holder) {
         mAdapter.onViewRecycled(holder);
     }
 
     @Override
-    public boolean onFailedToRecycleView(RecyclerView.ViewHolder holder) {
+    public boolean onFailedToRecycleView(T holder) {
         return mAdapter.onFailedToRecycleView(holder);
     }
 
     @Override
-    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+    public void onViewAttachedToWindow(T holder) {
         mAdapter.onViewAttachedToWindow(holder);
     }
 
     @Override
-    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+    public void onViewDetachedFromWindow(T holder) {
         mAdapter.onViewDetachedFromWindow(holder);
     }
 

@@ -19,7 +19,7 @@
  *   limitations under the License.
  *  *****************************************************************************
  */
-package it.gmariotti.recyclerview.adapter;
+package it.gmariotti.recyclerview.adapter.helper;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -213,7 +213,7 @@ public class ViewAnimator {
     /**
      * Cancels any existing animations for given View.
      */
-    void cancelExistingAnimation(@NonNull final View view) {
+    public void cancelExistingAnimation(@NonNull final View view) {
         int hashCode = view.hashCode();
         Animator animator = mAnimators.get(hashCode);
         if (animator != null) {

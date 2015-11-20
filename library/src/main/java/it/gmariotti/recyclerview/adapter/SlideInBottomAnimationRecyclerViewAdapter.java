@@ -18,22 +18,29 @@
 package it.gmariotti.recyclerview.adapter;
 
 import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
+ * An implementation of the AnimatorAdapter class which applies a
+ * swing-in-from-bottom-animation to views.
+ *
  * @Author Gabriele Mariotti
  */
-public class AlphaAnimatorAdapter<T extends RecyclerView.ViewHolder> extends AnimatorAdapter<T> {
+public class SlideInBottomAnimationRecyclerViewAdapter<T extends RecyclerView.ViewHolder> extends AnimatorAdapter<T> {
 
-    public AlphaAnimatorAdapter(RecyclerView.Adapter<T> adapter, RecyclerView recyclerView) {
+    private static final String TRANSLATION_Y = "translationY";
+
+    public SlideInBottomAnimationRecyclerViewAdapter(RecyclerView.Adapter<T> adapter,
+                                                     RecyclerView recyclerView) {
         super(adapter, recyclerView);
     }
 
     @NonNull
     @Override
     public Animator[] getAnimators(@NonNull View view) {
-        return new Animator[0];
+        return new Animator[]{ObjectAnimator.ofFloat(view, TRANSLATION_Y, mRecyclerView.getMeasuredHeight() >> 1, 0)};
     }
 }

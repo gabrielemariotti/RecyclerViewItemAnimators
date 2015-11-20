@@ -1,7 +1,4 @@
 /*
- * Thanks to Niek Haarman for the original idea
- * https://github.com/nhaarman/ListViewAnimations/blob/master/lib-core/src/main/java/com/nhaarman/listviewanimations/util/AnimatorUtil.java
- *
  * ******************************************************************************
  *   Copyright (c) 2015 Gabriele Mariotti.
  *
@@ -21,30 +18,29 @@
 package it.gmariotti.recyclerview.adapter;
 
 import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 /**
+ * An implementation of the AnimatorAdapter class which applies a
+ * swing-in-from-the-left-animation to views.
+ *
  * @Author Gabriele Mariotti
  */
-public class AnimatorUtil {
+public class SlideInLeftAnimationRecyclerViewAdapter<T extends RecyclerView.ViewHolder> extends AnimatorAdapter<T> {
 
-    private AnimatorUtil() {
+    private static final String TRANSLATION_X = "translationX";
+
+    public SlideInLeftAnimationRecyclerViewAdapter(RecyclerView.Adapter<T> adapter,
+                                                   RecyclerView recyclerView) {
+        super(adapter, recyclerView);
     }
 
-    /**
-     * Merges given Animators into one array.
-     */
     @NonNull
-    public static Animator[] concatAnimators(@NonNull final Animator[] animators, @NonNull final Animator alphaAnimator) {
-        Animator[] allAnimators = new Animator[animators.length + 1];
-        int i = 0;
-
-        for (Animator animator : animators) {
-            allAnimators[i] = animator;
-            ++i;
-        }
-        allAnimators[allAnimators.length - 1] = alphaAnimator;
-        return allAnimators;
+    @Override
+    public Animator[] getAnimators(@NonNull View view) {
+        return new Animator[]{ObjectAnimator.ofFloat(view, TRANSLATION_X, 0 - mRecyclerView.getLayoutManager().getWidth(), 0)};
     }
-
 }

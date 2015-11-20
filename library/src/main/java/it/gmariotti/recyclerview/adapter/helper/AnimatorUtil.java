@@ -1,4 +1,7 @@
 /*
+ * Thanks to Niek Haarman for the original idea
+ * https://github.com/nhaarman/ListViewAnimations/blob/master/lib-core/src/main/java/com/nhaarman/listviewanimations/util/AnimatorUtil.java
+ *
  * ******************************************************************************
  *   Copyright (c) 2015 Gabriele Mariotti.
  *
@@ -15,25 +18,33 @@
  *   limitations under the License.
  *  *****************************************************************************
  */
-package it.gmariotti.recyclerview.adapter;
+package it.gmariotti.recyclerview.adapter.helper;
 
 import android.animation.Animator;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 /**
  * @Author Gabriele Mariotti
  */
-public class AlphaAnimatorAdapter<T extends RecyclerView.ViewHolder> extends AnimatorAdapter<T> {
+public class AnimatorUtil {
 
-    public AlphaAnimatorAdapter(RecyclerView.Adapter<T> adapter, RecyclerView recyclerView) {
-        super(adapter, recyclerView);
+    private AnimatorUtil() {
     }
 
+    /**
+     * Merges given Animators into one array.
+     */
     @NonNull
-    @Override
-    public Animator[] getAnimators(@NonNull View view) {
-        return new Animator[0];
+    public static Animator[] concatAnimators(@NonNull final Animator[] animators, @NonNull final Animator alphaAnimator) {
+        Animator[] allAnimators = new Animator[animators.length + 1];
+        int i = 0;
+
+        for (Animator animator : animators) {
+            allAnimators[i] = animator;
+            ++i;
+        }
+        allAnimators[allAnimators.length - 1] = alphaAnimator;
+        return allAnimators;
     }
+
 }
