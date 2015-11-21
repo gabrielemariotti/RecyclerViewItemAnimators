@@ -73,6 +73,9 @@ The sample app uses all features available in the widget.
 
 * [Changelog:](CHANGELOG.md) A complete changelog
 
+Acknowledgements
+--------------------
+* Thanks to [Niek Haarman][1] for some ideas and code taken from his [ListViewAnimations][2].
 
 Credits
 -------
@@ -111,3 +114,6 @@ License
 
 
 ---
+
+ [1]: https://plus.google.com/+NiekHaarman
+ [2]: https://github.com/nhaarman/ListViewAnimations
